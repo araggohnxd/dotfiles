@@ -58,3 +58,4 @@ alias nfn="nano ~/.zsh/functions"
 alias ytdla="ytdl -o '~w/Music/%(title)s.%(ext)s' --ignore-config -x --audio-format mp3"
 alias gnbb="gnb | cs"
 alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
+alias workspace="ssh workspace -p"
