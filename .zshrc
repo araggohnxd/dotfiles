@@ -8,11 +8,15 @@ setopt SHARE_HISTORY          # import and append new commands to history file
 
 # Environment variables
 export GPG_TTY=$TTY
-export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 export VISUAL="nano"
 export EDITOR="nano"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
 export YSU_HARDCORE=1
+
+if [[ $(grep -i Microsoft /proc/version) ]]; then
+	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+	export LIBGL_ALWAYS_INDIRECT=1
+fi
 
 zstyle ':z4h:' start-tmux no
 
