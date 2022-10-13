@@ -22,20 +22,20 @@ fi
 
 # checks if git is installed
 if ! command -v git >/dev/null; then
-	yes | sudo $pm git
 	printf "$YELLOW Now installing$GREEN git$YELLOW...$RESET\n"
+	yes | sudo $pm git
 fi
 
 # checks if zsh is installed
 if ! command -v zsh >/dev/null; then
-	yes | sudo $pm zsh
 	printf "$YELLOW Now installing$GREEN zsh$YELLOW...$RESET\n"
+	yes | sudo $pm zsh
 fi
 
 # checks if gcc is installed
 if ! command -v gcc >/dev/null; then
-	yes | sudo $pm gcc
 	printf "$YELLOW Now installing$GREEN gcc$YELLOW...$RESET\n"
+	yes | sudo $pm gcc
 fi
 
 # clone dotfiles bare repo
