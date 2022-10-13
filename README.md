@@ -24,7 +24,7 @@ echo "<public-key>" > ~/.ssh/id_rsa.pub
 echo "<private-key>" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 ```
 
-## You`re all set! Just run the install script:
+## You're all set! Just run the install script:
 ```sh
 curl -Lks https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.zsh/install.sh | /bin/bash
 ```
