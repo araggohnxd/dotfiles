@@ -51,4 +51,4 @@ source "$HOME/.cargo/env"
 # install rust utilitaries
 cargo install cargo-update zoxide exa bat procs ytop
 
-printf '\n\n\033[33mNow run `\033[32mexec zsh\033[33m` to finish the setup!\033[0m\n'
+printf '\n\n\033[33mNow run `\033[32mexec zsh\033[33m` to finish the setup!\033[0m\n\n'
