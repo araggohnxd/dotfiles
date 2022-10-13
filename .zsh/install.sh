@@ -6,13 +6,13 @@ function config {
 
 git clone --bare git@github.com:araggohnxd/dotfiles.git $HOME/dotfiles/
 config checkout
-if [ $? = 0 ]; then
-	echo "Checked out config"
-else
+if [ $? != 0 ]; then
 	echo "Backing up pre-existing dot files"
 	mkdir -p .config-backup
 	config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
 fi
+echo "Checked out config"
+
 config checkout
 config config status.showUntrackedFiles no
 curl https://sh.rustup.rs -sSf | sh
