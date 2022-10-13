@@ -51,9 +51,10 @@ alias actions="git clone git@github.com:araggohnxd/vogsphere-github-actions.git 
 
 # Utilities
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-alias upd="yay -Syyuu && cargo install-update -a && z4h update"
+alias upd="config pull && yay -Syyuu && cargo install-update -a && z4h update"
 alias nrc="nano ~/.zshrc"
 alias nal="nano ~/.zsh/aliases"
+alias nfn="nano ~/.zsh/functions"
 alias ytdla="ytdl -o '~w/Music/%(title)s.%(ext)s' --ignore-config -x --audio-format mp3"
 alias gnbb="gnb | cs"
 alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
