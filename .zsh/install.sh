@@ -24,6 +24,11 @@ if ! command -v zsh >/dev/null; then
 	yes | sudo $pm zsh
 fi
 
+# checks if gcc is installed
+if ! command -v gcc >/dev/null; then
+	yes | sudo $pm gcc
+fi
+
 # clone dotfiles bare repo
 git clone --bare git@github.com:araggohnxd/dotfiles.git $HOME/dotfiles/
 config checkout
@@ -39,11 +44,12 @@ config config status.showUntrackedFiles no
 # checks if rust/cargo is installed
 if ! command -v cargo >/dev/null; then
 	curl https://sh.rustup.rs -sSf | sh
+	config reset --hard
 fi
+source "$HOME/.cargo/env"
 
 # install rust utilitaries
 #cargo install cargo-update zoxide exa bat fd procs ytop
 cargo install zoxide # just z for testing purposes
 
-# done!
-exec zsh
+printf '\n\n\033[33mNow run `\033[32mexec zsh\033[33m` to finish the setup!\033[0m\n'
