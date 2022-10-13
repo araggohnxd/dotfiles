@@ -15,12 +15,12 @@ else
 fi
 
 # checks if git is installed
-if command -v git >/dev/null; then
+if ! command -v git >/dev/null; then
 	yes | sudo $pm git
 fi
 
 # checks if zsh is installed
-if command -v zsh >/dev/null; then
+if ! command -v zsh >/dev/null; then
 	yes | sudo $pm zsh
 fi
 
@@ -37,12 +37,13 @@ echo "Checked out config"
 config config status.showUntrackedFiles no
 
 # checks if rust/cargo is installed
-if command -v cargo >/dev/null; then
+if ! command -v cargo >/dev/null; then
 	curl https://sh.rustup.rs -sSf | sh
 fi
 
 # install rust utilitaries
-cargo install cargo-update zoxide exa bat fd procs ytop
+#cargo install cargo-update zoxide exa bat fd procs ytop
+cargo install zoxide # just z for testing purposes
 
 # done!
 exec zsh
