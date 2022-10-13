@@ -11,7 +11,6 @@ export GPG_TTY=$TTY
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 export VISUAL="nano"
 export EDITOR="nano"
-export PAGER="less"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
 export YSU_HARDCORE=1
 
