@@ -13,7 +13,7 @@ export EDITOR="nano"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
 export YSU_HARDCORE=1
 
-if [[ $(grep -i Microsoft /proc/version) ]]; then
+if [[ $(grep -i Microsoft /proc/version) ]]; then # Set XLaunch variables if running in WSL
 	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
