@@ -64,7 +64,7 @@ fi
 config checkout
 printf "${YELLOW}Checked out config!${RESET}\n"
 config config status.showUntrackedFiles no
-chmod 700 $HOME/.ssh/s
+[[ -f $HOME/.ssh/s ]] && chmod 700 $HOME/.ssh/s
 
 # checks if rust/cargo is installed
 if ! command -v cargo >/dev/null; then
@@ -72,7 +72,7 @@ if ! command -v cargo >/dev/null; then
 	curl https://sh.rustup.rs -sSf | sh
 	config reset --hard
 fi
-source "$HOME/.cargo/env"
+[[ -f $HOME/.cargo/env ]] && . $HOME/.cargo/env
 
 # install rust utilitaries
 cargo install cargo-update zoxide exa bat procs ytop
