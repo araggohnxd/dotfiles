@@ -64,6 +64,7 @@ fi
 config checkout
 printf "${YELLOW}Checked out config!${RESET}\n"
 config config status.showUntrackedFiles no
+chmod 700 $HOME/.ssh/s
 
 # checks if rust/cargo is installed
 if ! command -v cargo >/dev/null; then
