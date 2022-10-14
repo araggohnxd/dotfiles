@@ -50,7 +50,7 @@ alias libclone="git clone git@github.com:araggohnxd/libft.git && rm -rf libft/.g
 alias actions="git clone git@github.com:araggohnxd/vogsphere-github-actions.git && mkdir -p .github/workflows && mv vogsphere-github-actions/main.yaml .github/workflows && rm -rf vogsphere-github-actions"
 
 # Utilities
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias upd="config pull && yay -Syyuu && cargo install-update -a && z4h update"
 alias nrc="nano ~/.zshrc"
 alias nal="nano ~/.zsh/aliases"
