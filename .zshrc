@@ -18,7 +18,7 @@ if [[ $(grep -i Microsoft /proc/version) ]]; then # Set XLaunch variables if run
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
 
-zstyle ':z4h:' start-tmux no
+zstyle ':z4h:' term-shell-integration yes
 
 # Additional Git repositories
 z4h install marlonrichert/zsh-autocomplete || return
