@@ -5,6 +5,7 @@ setopt HIST_EXPIRE_DUPS_FIRST # trim duplicate commands first when history is fu
 setopt HIST_IGNORE_SPACE      # don't save to history if current command starts with a blankspace
 setopt HIST_REDUCE_BLANKS     # trim trailing blankspaces when saving command to history
 setopt SHARE_HISTORY          # import and append new commands to history file
+setopt IGNORE_EOF             # do not exit on EOF
 
 # Environment variables
 export GPG_TTY=$TTY
@@ -19,6 +20,9 @@ if [[ $(grep -i Microsoft /proc/version) ]]; then # Set XLaunch variables if run
 fi
 
 zstyle ':z4h:' term-shell-integration yes
+zstyle ':z4h:' prompt-at-bottom no
+zstyle ':z4h:ssh-agent:' start yes
+zstyle ':z4h:ssh-agent:' extra-args -t 20h
 
 # Additional Git repositories
 z4h install marlonrichert/zsh-autocomplete || return
@@ -41,6 +45,7 @@ z4h bindkey z4h-cd-back Alt+Left                  # cd into the previous directo
 z4h bindkey z4h-cd-forward Alt+Right              # cd into the next directory
 z4h bindkey z4h-cd-up Alt+Up                      # cd into the parent directory
 z4h bindkey z4h-cd-down Alt+Down                  # open fzf
+z4h bindkey z4h-eof Ctrl+D                        # EOF
 z4h bindkey cls Ctrl+L                            # clear terminal and scrollback history
 
 # Define named directories
