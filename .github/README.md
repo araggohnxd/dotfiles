@@ -1,7 +1,7 @@
 # dotfiles
 
 ## Setup
-First, you need to install `curl`.
+First, you need to update your packages and install `curl`.
 
 Using `apt`, run:
 ```sh
