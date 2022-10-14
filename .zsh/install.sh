@@ -15,6 +15,7 @@ function mvmk () {
 }
 export -f mvmk
 
+# show user what is being installed
 function now_installing() {
 	printf "${YELLOW}Now installing ${GREEN}$@${YELLOW}...${RESET}\n"
 }
@@ -59,7 +60,7 @@ config checkout
 if [ $? != 0 ]; then # checkout may fail if there are pre-existing dotfiles
 	printf "${YELLOW}Backing up pre-existing dotfiles...${RESET}\n"
 	mkdir -p .config-backup
-	config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} bash -c 'mvmk "$@"' _ {} .config-backup/{}
+	config checkout 2>&1 | grep -P "\t" | awk {'print $1'} | xargs -I{} bash -c 'mvmk "$@"' _ {} .config-backup/{}
 fi
 config checkout
 printf "${YELLOW}Checked out config!${RESET}\n"
