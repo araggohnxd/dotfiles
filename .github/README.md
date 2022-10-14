@@ -10,7 +10,7 @@ sudo apt update -y && sudo apt upgrade -y && sudo apt -y install curl
 
 Using `pacman`, run:
 ```sh
-pacman -Syyuu --noconfirm && pacman -S --noconfirm curl
+sudo pacman -Syyuu --noconfirm && sudo pacman -S --noconfirm curl
 ```
 
 ## You're all set! Just run the install script:
