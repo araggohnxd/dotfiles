@@ -7,11 +7,10 @@ RESET=$(tput sgr0)
 # make it possible to backup dotfiles inside directories other than $HOME
 function mvmk () {
 	dir="$2" # include a '/' at the end to indicate directory (not filename)
-	tmp="$2"; tmp="${tmp: -1}"
-	[ "$tmp" != "/" ] && dir="$(dirname "$2")"
-	[[ -a "$dir" ]] ||
-	mkdir -p "$dir" &&
-	mv "$@"
+	tmp="$2"
+	tmp="${tmp: -1}"
+	[[ "$tmp" != "/" ]] && dir="$(dirname "$2")"
+	[[ -a "$dir" ]] || mkdir -p "$dir" && mv "$@"
 }
 export -f mvmk
 
@@ -22,7 +21,7 @@ function now_installing() {
 
 # configure dotfiles bare repo
 function config() {
-	/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME $@
+	/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 
 # this script only works via apt or pacman, sorry
@@ -55,12 +54,12 @@ if ! command -v gcc >/dev/null; then
 fi
 
 # clone dotfiles bare repo
-git clone --bare git@github.com:araggohnxd/dotfiles.git $HOME/dotfiles/
+git clone --bare git@github.com:araggohnxd/dotfiles.git $HOME/.dotfiles/
 config checkout
 if [ $? != 0 ]; then # checkout may fail if there are pre-existing dotfiles
 	printf "${YELLOW}Backing up pre-existing dotfiles...${RESET}\n"
-	mkdir -p .config-backup
-	config checkout 2>&1 | grep -P "\t" | awk {'print $1'} | xargs -I{} bash -c 'mvmk "$@"' _ {} .config-backup/{}
+	mkdir -p .dotfiles-backup
+	config checkout 2>&1 | grep -P "\t" | awk {'print $1'} | xargs -I{} bash -c 'mvmk "$@"' _ {} .dotfiles-backup/{}
 fi
 config checkout
 printf "${YELLOW}Checked out config!${RESET}\n"
