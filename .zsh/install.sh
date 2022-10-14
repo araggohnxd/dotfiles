@@ -54,7 +54,7 @@ if ! command -v gcc >/dev/null; then
 fi
 
 # clone dotfiles bare repo
-git clone --bare git@github.com:araggohnxd/dotfiles.git $HOME/.dotfiles/
+git clone --bare https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/
 config checkout
 if [ $? != 0 ]; then # checkout may fail if there are pre-existing dotfiles
 	printf "${YELLOW}Backing up pre-existing dotfiles...${RESET}\n"

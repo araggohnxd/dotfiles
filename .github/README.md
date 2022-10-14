@@ -1,27 +1,16 @@
 # dotfiles
 
 ## Setup
-First, you need to install `curl` and `ssh`.
+First, you need to install `curl`.
 
 Using `apt`, run:
 ```sh
-sudo apt update -y && sudo apt upgrade -y && sudo apt -y install curl ssh
+sudo apt update -y && sudo apt upgrade -y && sudo apt -y install curl
 ```
 
 Using `pacman`, run:
 ```sh
-pacman -Syyuu --noconfirm && pacman -S --noconfirm curl openssh
-```
-
-Now, copy your `ssh` keys in order to be able to access this repository in the desired machine:
-```sh
-mkdir -p ~/.ssh
-```
-```sh
-echo "<public-key>" > ~/.ssh/id_rsa.pub
-```
-```sh
-echo "<private-key>" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+pacman -Syyuu --noconfirm && pacman -S --noconfirm curl
 ```
 
 ## You're all set! Just run the install script:
