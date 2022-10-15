@@ -47,7 +47,7 @@ fi
 
 printf "${YELLOW}Cloning dotfiles bare repository...${RESET}\n"
 # clone dotfiles bare repo and checkout to home dir
-git clone --bare https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/ &>/dev/null
+git clone --bare --quiet https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/ &>/dev/null
 config checkout &>/dev/null
 if [ $? != 0 ]; then # checkout may fail if there are pre-existing dotfiles
 	printf "${YELLOW}Backing up pre-existing dotfiles...${RESET}\n"
