@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
@@ -20,7 +20,7 @@ function install_it() {
 	if [[ $@ == "cargo" ]]; then
 		curl https://sh.rustup.rs -sSf | sh
 	else
-		yes | sudo $pm $@
+		yes | sudo $pm $@ >/dev/null
 	fi
 }
 
@@ -45,30 +45,32 @@ fi
 [[ -x "$(command -v zsh)" ]] || install_it zsh
 [[ -x "$(command -v gcc)" ]] || install_it gcc
 
+printf "${YELLOW}Cloning dotfiles bare repository...${RESET}\n"
 # clone dotfiles bare repo and checkout to home dir
-git clone --bare https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/
-config checkout
+git clone --bare https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/ >/dev/null
+config checkout &>/dev/null
 if [ $? != 0 ]; then # checkout may fail if there are pre-existing dotfiles
 	printf "${YELLOW}Backing up pre-existing dotfiles...${RESET}\n"
 	mkdir -p .dotfiles-backup
 	config checkout 2>&1 | grep -P "\t" | awk {'print $1'} | xargs -I{} bash -c 'mvmk "$@"' _ {} .dotfiles-backup/{}
 fi
-config checkout
-printf "${YELLOW}Checked out config!${RESET}\n"
+config checkout >/dev/null && printf "${YELLOW}Checked out config!${RESET}\n"
 config config status.showUntrackedFiles no
 
+printf "${YELLOW}Setting ssh config permissions...${RESET}\n"
 # set safe permissions for ssh files
 [[ -d $HOME/.ssh/s ]] && chmod 700 $HOME/.ssh/s
 [[ -f $HOME/.ssh/config ]] && chmod 600 $HOME/.ssh/config
 
 # checks if rust/cargo is installed, and install it if not
 [[ -x "$(command -v cargo)" ]] || install_it cargo
-config reset --hard # reset any configs cargo installer may have done
+config reset --hard &>/dev/null # reset any configs cargo installer may have done
 
 # source cargo env if created
 [[ -f $HOME/.cargo/env ]] && . $HOME/.cargo/env
 
-# install rust utilitaries
+# install rust utilities
+printf "${YELLOW}Now installing ${GREEN}rust${YELLOW} utilities with ${GREEN}cargo${YELLOW}...${RESET}\n"
 cargo install cargo-update zoxide exa bat procs ytop
 
 printf "\n\n${YELLOW}Now run '${GREEN}exec zsh${YELLOW}' to finish the setup!${RESET}\n\n"
