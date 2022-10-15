@@ -32,10 +32,8 @@ function config() {
 # this script only works via apt or pacman, sorry
 if [[ -x "$(command -v pacman)" ]]; then
 	pm="pacman -S"
-	printf "${YELLOW}Your package manager is ${GREEN}pacman${YELLOW}!${RESET}\n"
 elif [[ -x "$(command -v apt)" ]]; then
 	pm="apt install"
-	printf "${YELLOW}Your package manager is ${GREEN}apt${YELLOW}!${RESET}\n"
 else
 	printf "${YELLOW}get a real OS ffs${RESET}\n" && exit 1
 fi
