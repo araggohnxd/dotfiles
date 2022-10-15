@@ -51,7 +51,7 @@ alias actions="git clone git@github.com:araggohnxd/vogsphere-github-actions.git 
 
 # Utilities
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias upd="config pull && yay -Syyuu && cargo install-update -a && z4h update"
+alias upd="dotfiles pull && yay -Syyuu && cargo install-update -a && z4h update"
 alias nrc="nano ~/.zshrc"
 alias nal="nano ~/.zsh/aliases"
 alias nfn="nano ~/.zsh/functions"
