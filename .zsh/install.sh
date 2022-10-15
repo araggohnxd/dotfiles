@@ -20,7 +20,7 @@ function install_it() {
 	if [[ $@ == "cargo" ]]; then
 		curl https://sh.rustup.rs -sSf | sh
 	else
-		yes | sudo $pm $@ >/dev/null
+		yes | sudo $pm $@
 	fi
 }
 
@@ -32,8 +32,8 @@ function config() {
 # this script only works via apt or pacman, sorry
 if [[ -x "$(command -v pacman)" ]]; then
 	pm="pacman -S"
-elif [[ -x "$(command -v apt)" ]]; then
-	pm="apt install"
+elif [[ -x "$(command -v apt-get)" ]]; then
+	pm="apt-get install"
 else
 	printf "${YELLOW}get a real OS ffs${RESET}\n" && exit 1
 fi
