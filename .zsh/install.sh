@@ -15,8 +15,13 @@ function mvmk () {
 export -f mvmk
 
 # show user what is being installed
-function now_installing() {
+function install_it() {
 	printf "${YELLOW}Now installing ${GREEN}$@${YELLOW}...${RESET}\n"
+	if [[ $@ == "cargo" ]]; then
+		curl https://sh.rustup.rs -sSf | sh
+	else
+		yes | sudo $pm $@
+	fi
 }
 
 # configure dotfiles bare repo
@@ -25,35 +30,22 @@ function config() {
 }
 
 # this script only works via apt or pacman, sorry
-if command -v pacman >/dev/null; then
+if [[ -x "$(command -v pacman)" ]]; then
 	pm="pacman -S"
 	printf "${YELLOW}Your package manager is ${GREEN}pacman${YELLOW}!${RESET}\n"
-elif command -v apt >/dev/null; then
+elif [[ -x "$(command -v apt)" ]]; then
 	pm="apt install"
 	printf "${YELLOW}Your package manager is ${GREEN}apt${YELLOW}!${RESET}\n"
 else
 	printf "${YELLOW}get a real OS ffs${RESET}\n" && exit 1
 fi
 
-# checks if git is installed
-if ! command -v git >/dev/null; then
-	now_installing git
-	yes | sudo $pm git
-fi
+# check if these commands are installed, and install them if not
+[[ -x "$(command -v git)" ]] || install_it git
+[[ -x "$(command -v zsh)" ]] || install_it zsh
+[[ -x "$(command -v gcc)" ]] || install_it gcc
 
-# checks if zsh is installed
-if ! command -v zsh >/dev/null; then
-	now_installing zsh
-	yes | sudo $pm zsh
-fi
-
-# checks if gcc is installed
-if ! command -v gcc >/dev/null; then
-	now_installing gcc
-	yes | sudo $pm gcc
-fi
-
-# clone dotfiles bare repo
+# clone dotfiles bare repo and checkout to home dir
 git clone --bare https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/
 config checkout
 if [ $? != 0 ]; then # checkout may fail if there are pre-existing dotfiles
@@ -69,12 +61,11 @@ config config status.showUntrackedFiles no
 [[ -d $HOME/.ssh/s ]] && chmod 700 $HOME/.ssh/s
 [[ -f $HOME/.ssh/config ]] && chmod 600 $HOME/.ssh/config
 
-# checks if rust/cargo is installed
-if ! command -v cargo >/dev/null; then
-	now_installing cargo
-	curl https://sh.rustup.rs -sSf | sh
-	config reset --hard
-fi
+# checks if rust/cargo is installed, and install it if not
+[[ -x "$(command -v cargo)" ]] || install_it cargo
+config reset --hard # reset any configs cargo installer may have done
+
+# source cargo env if created
 [[ -f $HOME/.cargo/env ]] && . $HOME/.cargo/env
 
 # install rust utilitaries
