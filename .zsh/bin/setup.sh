@@ -24,7 +24,6 @@ function install_packages() {
 		gcc
 		cmake
 		exa
-		make
 		fd
 		ffmpeg
 		gdb
@@ -65,7 +64,12 @@ function install_packages() {
 	)
 
 	sudo pacman -Syu --noconfirm
-	sudo pacman -S --noconfirm "${packages[@]}"
+	if (( !WSL )); then
+		sudo pacman -S --noconfirm "${packages[@]}"
+	else
+		# can't use --noconfirm in wsl because of base-devel/fakeroot-tcp conflict
+		sudo pacman -S "${packages[@]}"
+	fi
 	[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman -Rns --noconfirm -
 	paccache -r
 }

@@ -47,6 +47,6 @@ config config status.showUntrackedFiles no
 mkdir -m 700 -p $HOME/.ssh/s
 [[ -f $HOME/.ssh/config ]] && chmod 600 $HOME/.ssh/config
 
-bash $HOME/.zsh/bin/setup.sh
+[[ -n $(sudo --version 2>/dev/null) ]] && bash $HOME/.zsh/bin/setup.sh
 
 printf "\n\n${YELLOW}Now run '${GREEN}exec zsh${YELLOW}' to finish the setup!${RESET}\n\n"
