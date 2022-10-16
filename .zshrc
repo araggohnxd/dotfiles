@@ -14,7 +14,7 @@ export EDITOR="nano"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
 export YSU_HARDCORE=1
 
-if [[ $(grep -i Microsoft /proc/version) ]]; then # Set XLaunch variables if running in WSL
+if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then # Set XLaunch variables if running in WSL
 	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
@@ -51,7 +51,5 @@ z4h bindkey cls Ctrl+L                            # clear terminal and scrollbac
 # Define named directories
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home # ~w <=> Windows home directory on WSL
 
-# Set history file path and size
+# Set history file path
 HISTFILE=$HOME/.cache/zsh/zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
