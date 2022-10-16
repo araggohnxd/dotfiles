@@ -18,7 +18,7 @@ function mvmk()
 
 export -f mvmk
 
-set -xueEo pipefail
+set -xuEo pipefail
 
 umask o-w
 
