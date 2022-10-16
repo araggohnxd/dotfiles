@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xueE -o pipefail
+set -xueEo pipefail
 
 if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then
 	readonly WSL=1
@@ -9,12 +9,9 @@ else
 fi
 
 function install_yay() {
-	sudo pacman -Syu --noconfirm
-	pacman -S --noconfirm --needed git base-devel
-	git clone https://aur.archlinux.org/yay.git /tmp/yay
-	cd /tmp/yay
-	makepkg -si
-	rm -rf /tmp/yay
+	git clone https://aur.archlinux.org/yay.git
+	cd yay && makepkg -si
+	rm -rf yay
 }
 
 function install_packages() {
@@ -28,18 +25,17 @@ function install_packages() {
 		cmake
 		exa
 		make
-		fakeroot
 		fd
 		ffmpeg
 		gdb
 		gedit
 		git
-		glibc-debug
 		inetutils
 		lib32-glibc
 		libbsd
 		libtool
 		lsof
+		make
 		man-db
 		man-pages
 		nano
@@ -47,6 +43,7 @@ function install_packages() {
 		neovim
 		npm
 		openssh
+		pacman-contrib
 		php
 		procs
 		python
@@ -67,9 +64,9 @@ function install_packages() {
 		zsh
 	)
 
-	yay -Syu --noconfirm
-	yay -S --noconfirm "${packages[@]}"
-	[[ -n $(pacman -Qtdq) ]] && yay -Qtdq | yay -Rns -
+	sudo pacman -Syu --noconfirm
+	sudo pacman -S --noconfirm "${packages[@]}"
+	[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman -Rns --noconfirm -
 	paccache -r
 }
 
@@ -81,6 +78,7 @@ function install_vscode() {
 
 function add_to_sudoers() {
 	# This is to be able to create /etc/sudoers.d/"$username".
+	[[ -n $(grep sudo /etc/group) ]] || return 0
 	if [[ "$USER" == *'~' || "$USER" == *.* ]]; then
 		>&2 echo "$BASH_SOURCE: invalid username: $USER"
 		exit 1
@@ -95,8 +93,8 @@ umask g-w,o-w
 
 add_to_sudoers
 
-install_yay
 install_packages
+install_yay
 install_vscode
 
 echo DONE

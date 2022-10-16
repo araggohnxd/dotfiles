@@ -37,7 +37,7 @@ sudo pacman -S --noconfirm zsh
 # clone dotfiles bare repo and checkout to home dir
 git clone --bare --quiet https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/
 config checkout &>/dev/null
-if [ $? != 0 ]; then # checkout may fail if there are pre-existing dotfiles
+if [[ $? != 0 ]]; then # checkout may fail if there are pre-existing dotfiles
 	mkdir -p .dotfiles-backup
 	config checkout 2>&1 | grep -P "\t" | awk {'print $1'} | xargs -I{} bash -c 'mvmk "$@"' _ {} .dotfiles-backup/{}
 fi
