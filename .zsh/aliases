@@ -15,7 +15,7 @@ alias cs="clip.exe"
 alias nvim="lvim"
 alias vim="lvim"
 alias vi="lvim"
-alias top="ytop"
+alias top="btm"
 alias fzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
 # Git
