@@ -3,19 +3,14 @@
 ## Setup
 First, you need to update your packages and install `curl`.
 
-Using `apt`, run:
-```sh
-sudo apt update -y && sudo apt upgrade -y && sudo apt -y install curl
-```
-
 Using `pacman`, run:
 ```sh
-sudo pacman -Syyuu --noconfirm && sudo pacman -S --noconfirm curl
+sudo pacman -Syu --noconfirm && sudo pacman -S --noconfirm curl
 ```
 
 ## You're all set! Just run the install script:
 ```sh
-curl -Lks https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.zsh/install.sh | /bin/bash
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.zsh/bin/bootstrap.sh')"
 ```
 Note that during the script execution, you will be prompted with some confirmation prompts, so pay attention.
 
