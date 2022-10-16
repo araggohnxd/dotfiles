@@ -1,5 +1,9 @@
 #!/bin/bash
 
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+RESET=$(tput sgr0)
+
 # configuration function for dotfiles bare repo
 function config()
 {
@@ -43,6 +47,6 @@ config config status.showUntrackedFiles no
 mkdir -m 700 -p $HOME/.ssh/s
 [[ -f $HOME/.ssh/config ]] && chmod 600 $HOME/.ssh/config
 
-bash $HOME/.dotfiles/.zsh/bin/setup.sh
+bash $HOME/.zsh/bin/setup.sh
 
 printf "\n\n${YELLOW}Now run '${GREEN}exec zsh${YELLOW}' to finish the setup!${RESET}\n\n"
