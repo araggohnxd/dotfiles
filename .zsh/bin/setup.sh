@@ -71,7 +71,7 @@ function install_packages() {
 function install_yay() {
 	[[ -z $(yay --version 2>/dev/null) ]] || return 0
 	git clone https://aur.archlinux.org/yay.git
-	cd yay
+	builtin cd yay
 	makepkg -si
 	builtin cd ../
 	rm -rf yay
