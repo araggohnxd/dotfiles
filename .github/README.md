@@ -37,7 +37,7 @@ choco.exe install -y microsoft-windows-terminal vcxsrv
 	- Click *"Next"*;
 	- Check *"Disable access control"*;
 	- Click *"Next"*;
-	- Click *Save Configuration* and save `config.xlaunch` in your `Startup` folder at `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`;
+	- Click *"Save Configuration"* and save `config.xlaunch` in your `Startup` folder at `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`;
 	- Click *"Finish"*.
 - Reboot.
 
@@ -46,7 +46,7 @@ choco.exe install -y microsoft-windows-terminal vcxsrv
 - Unzip it in a directory you have write permissions. I personally recommend `C:\` disk root.
 - Execute `Arch.exe`.
 	- As a side note, the executable name is what is used as the WSL instance name. If you rename it, you can have multiple installs.
-- Once the installation is done, you can either run `Arch.exe` again or execute it through Windos Terminal.
+- Once the installation is done, you can either run `Arch.exe` again or execute it through Windows Terminal.
 
 - You will be prompted as the root user. Set up it's password by running:
 ```sh
@@ -67,7 +67,7 @@ useradd -m -G wheel -s /bin/bash araggohnxd
 ```sh
 passwd araggohnxd
 ```
-- Then exit Arch by typing running `exit` or pressing `Ctrl+D`.
+- Then exit Arch by running `exit` or pressing `Ctrl+D`.
 
 - Open `PowerShell` and go to the directory you placed the Arch executable, then run this command to set the user you just created as the default user:
 ```powershell
