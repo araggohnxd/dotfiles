@@ -30,7 +30,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 - Also in your `PowerShell`, as *Administrator*, run:
 ```powershell
-choco.exe install -y microsoft-windows-terminal vcxsrv
+choco install -y microsoft-windows-terminal vcxsrv
 ```
 - Run *Start* > *XLaunch*
 	- Click *"Next"*;
