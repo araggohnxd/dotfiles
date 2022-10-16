@@ -25,7 +25,7 @@ umask o-w
 rm -rf $HOME/.cache
 
 sudo pacman -Syu --noconfirm
-[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman -Rns -
+[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman --noconfirm -Rns -
 
 sudo pacman -S --noconfirm git
 sudo pacman -S --noconfirm zsh
