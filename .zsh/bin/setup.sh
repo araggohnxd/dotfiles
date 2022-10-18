@@ -43,6 +43,7 @@ function install_packages() {
 		python-pip
 		ruby
 		rust
+		tmux
 		tree
 		unzip
 		valgrind
@@ -58,12 +59,13 @@ function install_packages() {
 	)
 
 	sudo pacman -Syu --noconfirm
-	if (( !WSL )); then
-		sudo pacman -S --noconfirm "${packages[@]}"
-	else
-		# can't use '--noconfirm' in WSL because of base-devel/fakeroot-tcp conflict
-		sudo pacman -S "${packages[@]}"
+	if (( WSL )); then
+		# uninstall fakeroot-tcp and delete fakeroot from ignored packages
+		# to avoid conflicts with base-devel installation
+		sudo sed -i '/fakeroot/d' /etc/pacman.conf
+		sudo pacman -Rns --noconfirm fakeroot-tcp
 	fi
+	sudo pacman -S --noconfirm "${packages[@]}"
 	[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman -Rns --noconfirm -
 	paccache -r
 }

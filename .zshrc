@@ -19,10 +19,12 @@ if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then # Set XLaunch v
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
 
-zstyle ':z4h:' term-shell-integration yes
+zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
 zstyle ':z4h:' prompt-at-bottom no
+zstyle ':z4h:' term-shell-integration yes
 zstyle ':z4h:ssh-agent:' start yes
 zstyle ':z4h:ssh-agent:' extra-args -t 20h
+zstyle ':z4h:fzf-complete' recurse-dirs yes
 
 # Additional Git repositories
 z4h install marlonrichert/zsh-autocomplete || return
@@ -52,4 +54,4 @@ z4h bindkey cls Ctrl+L                            # clear terminal and scrollbac
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home # ~w <=> Windows home directory on WSL
 
 # Set history file path
-HISTFILE=$HOME/.cache/zsh/zsh_history
+HISTFILE=$HOME/.zsh/.zsh_history
