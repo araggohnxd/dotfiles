@@ -32,6 +32,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```powershell
 choco install -y microsoft-windows-terminal vcxsrv
 ```
+
+- Run *Start* > *Windows Terminal*
+	- Press `Ctrl+,`;
+	- Click on the bottom left corner to open JSON file;
+	- Replace the contents of `settings.json` with [this](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.config/windows-terminal-settings.json).
+
 - Run *Start* > *XLaunch*
 	- Click *"Next"*;
 	- Click *"Next"*;
