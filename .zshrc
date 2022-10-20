@@ -19,8 +19,10 @@ if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then # Set XLaunch v
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
 
-zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
-zstyle ':z4h:' prompt-at-bottom no
+zstyle ':z4h:' start-tmux no
+#zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
+#zstyle ':z4h:' term-vresize top
+#zstyle ':z4h:' prompt-at-bottom no
 zstyle ':z4h:' term-shell-integration yes
 zstyle ':z4h:ssh-agent:' start yes
 zstyle ':z4h:ssh-agent:' extra-args -t 20h
