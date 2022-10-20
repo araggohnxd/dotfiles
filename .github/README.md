@@ -77,7 +77,7 @@ passwd araggohnxd
 
 - Open `PowerShell` and go to the directory you placed the Arch executable, then run this command to set the user you just created as the default user:
 ```powershell
-Arch.exe config --default-user araggohnxd
+.\Arch.exe config --default-user araggohnxd
 ```
 
 ### Arch Setup
