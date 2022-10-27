@@ -8,7 +8,7 @@ Nerd fonts are required because it contains some symbols and glyphs that will al
 
 - Download these `.ttf` files:
 	- [Caskaydia Cove Nerd Font Complete](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete.ttf)
-	- [Caskaydia Cove Nerd Font Complete Mono](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Cove%20Nerd%20Font%20Complete%20Mono.ttf)
+	- [Caskaydia Cove Nerd Font Complete Mono](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Mono.ttf)
 	- [Caskaydia Cove Nerd Font Complete Mono Windows Compatible](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf)
 - Right-click on each file and click *"Install"*.
 
