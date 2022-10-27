@@ -2,6 +2,16 @@
 
 ## Windows Setup
 
+### Install Nerd Fonts
+
+Nerd fonts are required because it contains some symbols and glyphs that will allow your terminal prompt to look nicer.
+
+- Download these `.ttf` files:
+	- [Caskaydia Cove Nerd Font Complete](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete.ttf)
+	- [Caskaydia Cove Nerd Font Complete Mono](Cove%20Nerd%20Font%20Complete%20Mono.ttf)
+	- [Caskaydia Cove Nerd Font Complete Mono Windows Compatible](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf)
+- Right-click on each file and click *"Install"*.
+
 ### Enable Windows Subsystem for Linux
 
 - Open `PowerShell` as *Administrator* and run:
