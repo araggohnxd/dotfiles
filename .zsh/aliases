@@ -56,6 +56,6 @@ alias upd="dotfiles pull && yay -Syu && z4h update"
 alias nrc="nano ~/.zshrc"
 alias nal="nano ~/.zsh/aliases"
 alias nfn="nano ~/.zsh/functions"
-alias gnbb="gnb | cs"
+alias gnbb="gnb | tr -d '\n' | cs"
 alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 alias workspace="ssh workspace -p"
