@@ -10,22 +10,21 @@ fi
 
 function install_packages() {
 	local packages=(
+		apt-transport-https
 		bat
-		base-devel
 		binutils
-		bottom
+		build-essential
 		clang
 		gcc
 		cmake
 		exa
-		fd
+		fd-find
 		ffmpeg
 		gdb
 		gedit
-		git
-		inetutils
-		lib32-glibc
-		libbsd
+		inetutils-tools
+		gcc-multilib
+		libbsd-dev
 		libtool
 		lsof
 		make
@@ -35,48 +34,49 @@ function install_packages() {
 		neofetch
 		neovim
 		npm
-		openssh
-		pacman-contrib
+		ssh
 		php
-		procs
 		python
-		python-pip
+		python3-pip
 		ruby
-		rust
 		tmux
 		tree
 		unzip
 		valgrind
 		vim
 		wget
-		which
-		xf86-video-vesa
 		yarn
-		yt-dlp
 		zip
 		zoxide
-		zsh
 	)
 
-	sudo pacman -Syu --noconfirm
-	if (( WSL )); then
-		# uninstall fakeroot-tcp and delete fakeroot from ignored packages
-		# to avoid conflicts with base-devel installation
-		sudo sed -i '/fakeroot/d' /etc/pacman.conf
-		sudo pacman -Rns --noconfirm fakeroot-tcp
-	fi
-	sudo pacman -S --noconfirm "${packages[@]}"
-	[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman -Rns --noconfirm -
-	paccache -r
+	sudo apt update
+	sudo bash -c 'DEBIAN_FRONTEND=noninteractive apt -o DPkg::options::=--force-confdef -o DPkg::options::=--force-confold upgrade -y'
+	sudo apt install -y "${packages[@]}"
+	sudo apt autoremove -y
+	sudo apt autoclean
 }
 
-function install_yay() {
-	[[ -z $(yay --version 2>/dev/null) ]] || return 0
-	git clone https://aur.archlinux.org/yay.git
-	builtin cd yay
-	makepkg -si
-	builtin cd ../
-	rm -rf yay
+function install_bottom() {
+	! command -v bottom &>/dev/null || return 0
+	curl -LO https://github.com/ClementTsang/bottom/releases/download/0.6.8/bottom_0.6.8_amd64.deb
+	sudo dpkg -i bottom_0.6.8_amd64.deb
+}
+
+function install_procs() {
+	! command -v procs &>/dev/null || return 0
+	cargo install procs
+}
+
+function install_rust() {
+	! command -v rustc &>/dev/null || return 0
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+}
+
+function install_ydtlp()
+{
+	! command -v yt-dlp &>/dev/null || return 0
+	python3 -m pip install -U yt-dlp
 }
 
 function install_norminette() {
@@ -88,7 +88,11 @@ function install_norminette() {
 function install_vscode() {
 	(( !WSL )) || return 0
 	! command -v code &>/dev/null || return 0
-	yay -S --no-confirm visual-studio-code-bin
+	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+	sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft-archive-keyring.gpg
+	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+	sudo apt update
+	sudo apt install -y code
 }
 
 function add_to_sudoers() {
@@ -109,7 +113,9 @@ umask g-w,o-w
 add_to_sudoers
 
 install_packages
-install_yay
+install_rust
+install_bottom
+install_procs
 install_norminette
 install_vscode
 

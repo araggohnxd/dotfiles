@@ -28,14 +28,16 @@ umask o-w
 
 rm -rf $HOME/.cache
 
-sudo pacman -Syu --noconfirm
-[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman --noconfirm -Rns -
+sudo apt update
+sudo sh -c 'DEBIAN_FRONTEND=noninteractive apt -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" upgrade -y'
+sudo apt autoremove -y
+sudo apt autoclean
 
-sudo pacman -S --noconfirm git
-sudo pacman -S --noconfirm zsh
+sudo apt install -y git
+sudo apt install -y zsh
 
 # clone dotfiles bare repo and checkout to home dir
-git clone --bare --quiet https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/
+git clone -b debian --bare --quiet https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/
 config checkout &>/dev/null
 if [[ $? != 0 ]]; then # checkout may fail if there are pre-existing dotfiles
 	mkdir -p .dotfiles-backup
