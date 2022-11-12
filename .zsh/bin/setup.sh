@@ -29,7 +29,6 @@ function install_packages() {
 		lsof
 		make
 		man-db
-		man-pages
 		nano
 		neofetch
 		neovim
