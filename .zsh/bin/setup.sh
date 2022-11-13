@@ -11,7 +11,6 @@ fi
 function install_packages() {
 	local packages=(
 		apt-transport-https
-		bat
 		binutils
 		build-essential
 		clang
@@ -25,7 +24,11 @@ function install_packages() {
 		inetutils-tools
 		gcc-multilib
 		libbsd-dev
+		libglpk-dev
+		libncurses-dev
 		libtool
+		libxext-dev
+		libxml2-utils
 		lsof
 		make
 		man-db
@@ -46,7 +49,8 @@ function install_packages() {
 		wget
 		yarn
 		zip
-		zoxide
+		x11-utils
+		xorg
 	)
 
 	sudo apt update
@@ -54,6 +58,17 @@ function install_packages() {
 	sudo apt install -y "${packages[@]}"
 	sudo apt autoremove -y
 	sudo apt autoclean
+}
+
+function install_bat() {
+	! command -v batcat &>/dev/null || ! command -v bat &>/dev/null || return 0
+	sudo apt install bat -y
+	sudo ln -s /usr/bin/batcat /usr/local/bin/bat
+}
+
+function install_zoxide() {
+	! command -v zoxide &>/dev/null || return 0
+	curl -sS https://webinstall.dev/zoxide | bash
 }
 
 function install_bottom() {
@@ -90,7 +105,6 @@ function install_vscode() {
 	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 	sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft-archive-keyring.gpg
 	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-	sudo apt update
 	sudo apt install -y code
 }
 
@@ -113,9 +127,12 @@ add_to_sudoers
 
 install_packages
 install_rust
+install_bat
+install_zoxide
 install_bottom
 install_procs
 install_norminette
+install_ytdlp
 install_vscode
 
 echo DONE
