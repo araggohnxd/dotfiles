@@ -72,7 +72,7 @@ function install_zoxide() {
 }
 
 function install_bottom() {
-	! command -v bottom &>/dev/null || return 0
+	! command -v btm &>/dev/null || return 0
 	curl -LO https://github.com/ClementTsang/bottom/releases/download/0.6.8/bottom_0.6.8_amd64.deb
 	sudo dpkg -i bottom_0.6.8_amd64.deb
 }
