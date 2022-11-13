@@ -87,7 +87,7 @@ function install_rust() {
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 
-function install_ydtlp()
+function install_ytdlp()
 {
 	! command -v yt-dlp &>/dev/null || return 0
 	python3 -m pip install -U yt-dlp
