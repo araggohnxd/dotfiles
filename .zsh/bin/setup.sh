@@ -63,6 +63,7 @@ function install_packages() {
 function install_bat() {
 	! command -v batcat &>/dev/null || ! command -v bat &>/dev/null || return 0
 	sudo apt install bat -y
+	! command -v bat &>/dev/null || return 0
 	sudo ln -s /usr/bin/batcat /usr/local/bin/bat
 }
 
