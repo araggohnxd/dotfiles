@@ -53,11 +53,11 @@ function install_packages() {
 		xorg
 	)
 
-	sudo apt update
-	sudo bash -c 'DEBIAN_FRONTEND=noninteractive apt -o DPkg::options::=--force-confdef -o DPkg::options::=--force-confold upgrade -y'
-	sudo apt install -y "${packages[@]}"
-	sudo apt autoremove -y
-	sudo apt autoclean
+	sudo apt-get update
+	sudo bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::options::=--force-confdef -o DPkg::options::=--force-confold upgrade -y'
+	sudo apt-get install -y "${packages[@]}"
+	sudo apt-get autoremove -y
+	sudo apt-get autoclean
 }
 
 function install_bat() {
@@ -72,14 +72,27 @@ function install_zoxide() {
 }
 
 function install_bottom() {
-	! command -v btm &>/dev/null || return 0
-	curl -LO https://github.com/ClementTsang/bottom/releases/download/0.6.8/bottom_0.6.8_amd64.deb
-	sudo dpkg -i bottom_0.6.8_amd64.deb
+	local v="0.6.8"
+	! command -v bottom &>/dev/null || [[ "$(btm --version)" != "bottom $v" ]] || return 0
+	local deb
+	deb="$(mktemp)"
+	curl -fsSL "https://github.com/ClementTsang/bottom/releases/download/${v}/bottom_${v}_amd64.deb" > "$deb"
+	sudo dpkg -i "$deb"
+	rm "$deb"
 }
 
 function install_procs() {
+	local v="0.13.3"
 	! command -v procs &>/dev/null || return 0
-	cargo install procs
+	local tmp
+	tmp="$(mktemp -d)"
+	pushd -- "$tmp"
+	curl -fsSLO "https://github.com/dalance/procs/releases/download/v${v}/procs-v${v}-x86_64-linux.zip"
+	unzip -- "procs-v${v}-x86_64-linux.zip"
+	chmod +x procs
+	mv procs ~/.local/bin
+	popd
+	rm -rf -- "$tmp"
 }
 
 function install_rust() {
@@ -87,8 +100,7 @@ function install_rust() {
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 
-function install_ytdlp()
-{
+function install_ytdlp() {
 	! command -v yt-dlp &>/dev/null || return 0
 	python3 -m pip install -U yt-dlp
 }
@@ -105,7 +117,8 @@ function install_vscode() {
 	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 	sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft-archive-keyring.gpg
 	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-	sudo apt install -y code
+	sudo apt-get update
+	sudo apt-get install -y code
 }
 
 function add_to_sudoers() {

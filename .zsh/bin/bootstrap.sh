@@ -28,13 +28,13 @@ umask o-w
 
 rm -rf $HOME/.cache
 
-sudo apt update
-sudo sh -c 'DEBIAN_FRONTEND=noninteractive apt -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" upgrade -y'
-sudo apt autoremove -y
-sudo apt autoclean
+sudo apt-get update
+sudo sh -c 'DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" upgrade -y'
+sudo apt-get autoremove -y
+sudo apt-get autoclean
 
-sudo apt install -y git
-sudo apt install -y zsh
+sudo apt-get install -y git
+sudo apt-get install -y zsh
 
 # clone dotfiles bare repo and checkout to home dir
 git clone -b debian --bare --quiet https://github.com/araggohnxd/dotfiles.git $HOME/.dotfiles/

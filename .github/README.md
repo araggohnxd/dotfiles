@@ -58,65 +58,56 @@ choco install -y microsoft-windows-terminal vcxsrv
 - Reboot.
 
 ### WSL Installation
-- Visit [ArchWSL official repository](https://github.com/yuk7/ArchWSL/releases/latest) and get the latest `Arch.zip` file you can find in *Assets*.
-- Unzip it in a directory you have write permissions. I personally recommend `C:\` disk root.
-- Execute `Arch.exe`.
-	- As a side note, the executable name is what is used as the WSL instance name. If you rename it, you can have multiple installs.
-- Once the installation is done, you can either run `Arch.exe` again or execute it through Windows Terminal.
+This branch is specific for Debian, but will probably work without any problems in Ubuntu as well.
 
-- You will be prompted as the root user. Set up it's password by running:
-```sh
-passwd
-```
-
-- Setup sudoers file:
-```sh
-echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
-```
-
-- Create your user (replace any occurrences of *araggohnxd* with your username):
-```sh
-useradd -m -G wheel -s /bin/bash araggohnxd
-```
-
-- Setup your user's password:
-```sh
-passwd araggohnxd
-```
-- Then exit Arch by running `exit` or pressing `Ctrl+D`.
-
-- Open `PowerShell` and go to the directory you placed the Arch executable, then run this command to set the user you just created as the default user:
+- In your `PowerShell`, run the following command:
 ```powershell
-.\Arch.exe config --default-user araggohnxd
+wsl --install -d Debian
+```
+- You can change 'Debian' to your desired Debian based distribuition. Of course, it has to be available on WSL installation list. To check it, run:
+```powershell
+wsl -l -o
+```
+```powershell
+# Output example
+
+The following is a list of valid distributions that can be installed.
+Install using 'wsl --install -d <Distro>'.
+
+NAME               FRIENDLY NAME
+Ubuntu             Ubuntu
+Debian             Debian GNU/Linux
+kali-linux         Kali Linux Rolling
+SLES-12            SUSE Linux Enterprise Server v12
+SLES-15            SUSE Linux Enterprise Server v15
+Ubuntu-18.04       Ubuntu 18.04 LTS
+Ubuntu-20.04       Ubuntu 20.04 LTS
+OracleLinux_8_5    Oracle Linux 8.5
+OracleLinux_7_9    Oracle Linux 7.9
 ```
 
-### Arch Setup
-- Excute these commands to initialize the keyring. This step is necessary to use `pacman`.
+- You will be prompted to create your user. After setting your username and password, you must install `curl` in order to run the bootstrap script. Start by updating your packages:
 ```sh
-sudo pacman-key --init
+sudo apt-get update
+```
+```sh
+sudo apt-get -y upgrade
 ```
 
+- Then, install `curl`:
 ```sh
-sudo pacman-key --populate
+sudo apt-get -y install curl
 ```
 
+- Here's everything in a convenient one liner:
 ```sh
-sudo pacman -Sy --noconfirm archlinux-keyring
-```
-
-```sh
-sudo pacman -Su --noconfirm
-```
-
-- Once all packages are updated, install `curl` to make it possible to run the bootstrap script:
-```sh
-sudo pacman -S --noconfirm curl
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install curl
 ```
 
 ## You're all set!
 - Now, just run the bootstrap script:
 ```sh
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.zsh/bin/bootstrap.sh')"
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/debian/.zsh/bin/bootstrap.sh')"
 ```
 - During the script execution, you will be presented with some confirmation prompts and password prompts for `sudo`, so pay attention.
 
