@@ -42,6 +42,7 @@ z4h source $HOME/.zsh/aliases
 z4h source $HOME/.zsh/functions
 
 eval "$(zoxide init zsh)" # init z
+autoload -Uz zmv
 
 # Key bindings
 z4h bindkey z4h-backward-kill-word Ctrl+Backspace # delete whole word in command line
