@@ -16,7 +16,6 @@ function install_packages() {
 		clang
 		gcc
 		cmake
-		exa
 		fd-find
 		ffmpeg
 		gdb
