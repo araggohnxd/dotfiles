@@ -64,6 +64,11 @@ passwd araggohnxd
 ```
 
 ### Arch Setup
+- Before using `pacman`, I personally like to set the amount of allowed parallel donwloads to 10:
+```sh
+sudo sed -i 's/ParallelDownloads = [0-9]*/ParallelDownloads = 10/g' /etc/pacman.conf
+```
+
 - Excute these commands to initialize the keyring. This step is necessary to use `pacman`.
 ```sh
 sudo pacman-key --init
@@ -95,7 +100,7 @@ bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/mas
 
 Everything in a oneliner:
 ```sh
-sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman -Su --noconfirm && sudo pacman -S --noconfirm curl && bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.zsh/bin/bootstrap.sh')"
+sudo sed -i 's/ParallelDownloads = [0-9]*/ParallelDownloads = 10/g' /etc/pacman.conf && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman -Su --noconfirm && sudo pacman -S --noconfirm curl && bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.zsh/bin/bootstrap.sh')"
 ```
 
 - When the script is done running, simply run the command below, so `zsh4humans` can properly source everything up.
