@@ -6,11 +6,9 @@
 
 Nerd fonts are required because it contains some symbols and glyphs that will allow your terminal prompt to look nicer.
 
-- Download these `.ttf` files:
+- Download this `.ttf` file:
 	- [Caskaydia Cove Nerd Font Complete](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete.ttf)
-	- [Caskaydia Cove Nerd Font Complete Mono](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Mono.ttf)
-	- [Caskaydia Cove Nerd Font Complete Mono Windows Compatible](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.fonts/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf)
-- Right-click on each file and click *"Install"*.
+- Right-click it and click *"Install"*.
 
 ### Enable Windows Subsystem for Linux
 
@@ -36,26 +34,17 @@ Set-ExecutionPolicy Bypass -Scope Process
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
-### Install Windows Terminal and XLaunch
+### Install Windows Terminal
 
 - Also in your `PowerShell`, as *Administrator*, run:
 ```powershell
-choco install -y microsoft-windows-terminal vcxsrv
+choco install -y microsoft-windows-terminal
 ```
 
 - Run *Start* > *Windows Terminal*
 	- Press `Ctrl+,`;
 	- Click on the bottom left corner to open JSON file;
 	- Replace the contents of `settings.json` with [this](https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.config/windows-terminal-settings.json).
-
-- Run *Start* > *XLaunch*
-	- Click *"Next"*;
-	- Click *"Next"*;
-	- Check *"Disable access control"*;
-	- Click *"Next"*;
-	- Click *"Save Configuration"* and save `config.xlaunch` in your `Startup` folder at `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`;
-	- Click *"Finish"*.
-- Reboot.
 
 ### WSL Installation
 - Visit [ArchWSL official repository](https://github.com/yuk7/ArchWSL/releases/latest) and get the latest `Arch.zip` file you can find in *Assets*.
