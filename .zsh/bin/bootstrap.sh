@@ -40,8 +40,8 @@ config checkout &>/dev/null
 if [[ $? != 0 ]]; then # checkout may fail if there are pre-existing dotfiles
 	mkdir -p .dotfiles-backup
 	config checkout 2>&1 | grep -P "\t" | awk {'print $1'} | xargs -I{} bash -c 'mvmk "$@"' _ {} .dotfiles-backup/{}
+	config checkout
 fi
-config checkout
 config config status.showUntrackedFiles no
 
 mkdir -m 700 -p $HOME/.ssh/s
