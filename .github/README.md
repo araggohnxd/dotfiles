@@ -18,27 +18,11 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 ```
 - Reboot if prompted.
 
-### Install `chocolatey` package manager
-- Also in your `PowerShell`, as *Administrator*, verify your current execution policy:
-```powershell
-Get-ExecutionPolicy
-```
-
-- If it returns *"Restricted"*, you need to escalate your execution privileges, by running:
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process
-```
-- Check your execution policy again and ensure it was succesfully changed.
-
-- Now, simply run this command to finally install `chocolatey`:
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-```
 ### Install Windows Terminal
 
 - Also in your `PowerShell`, as *Administrator*, run:
 ```powershell
-choco install -y microsoft-windows-terminal
+winget install Microsoft.WindowsTerminal
 ```
 
 - Run *Start* > *Windows Terminal*
