@@ -109,7 +109,7 @@ bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/mas
 ```
 - During the script execution, you will be presented with some confirmation prompts and password prompts for `sudo`, so pay attention.
 
-- Everything in a oneliner:
+Everything in a oneliner:
 ```sh
 sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman -Su --noconfirm && sudo pacman -S --noconfirm curl && bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/araggohnxd/dotfiles/master/.zsh/bin/bootstrap.sh')"
 ```
