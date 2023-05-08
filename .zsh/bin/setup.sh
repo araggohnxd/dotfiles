@@ -23,6 +23,7 @@ function install_packages() {
 		gdb
 		gedit
 		git
+		go
 		inetutils
 		lib32-glibc
 		libbsd
@@ -74,7 +75,7 @@ function install_yay() {
 	[[ -z $(yay --version 2>/dev/null) ]] || return 0
 	git clone https://aur.archlinux.org/yay.git
 	builtin cd yay
-	makepkg -si
+	makepkg -si --noconfirm
 	builtin cd ../
 	rm -rf yay
 }
