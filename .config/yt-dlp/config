@@ -8,6 +8,4 @@
 
 --embed-subs
 
--o /mnt/c/Users/Matheus/Videos/youtube-dl/%(title)s.%(ext)s
-
 --no-mtime

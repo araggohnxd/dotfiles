@@ -92,6 +92,18 @@ function install_vscode() {
 	yay -S --no-confirm visual-studio-code-bin
 }
 
+function install_wslu() {
+	(( WSL )) || return 0
+	sudo pacman-key -r A2861ABFD897DD37
+	sudo pacman-key --lsign-key A2861ABFD897DD37
+	sudo cat << __EOF__ >> /etc/pacman.conf
+[wslutilities]
+Server = https://pkg.wslutiliti.es/arch/
+__EOF__
+	sudo pacman -Sy --noconfirm
+	sudo pacman -S wslu --noconfirm
+}
+
 function add_to_sudoers() {
 	# this is to be able to create /etc/sudoers.d/"$USER"
 	[[ -n $(grep sudo /etc/group) ]] || return 0
@@ -113,5 +125,6 @@ install_packages
 install_yay
 install_norminette
 install_vscode
+install_wslu
 
-echo DONE
+echo setup done

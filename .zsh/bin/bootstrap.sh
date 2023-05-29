@@ -22,7 +22,7 @@ function mvmk()
 
 export -f mvmk
 
-set -xuEo pipefail
+set -uEo pipefail
 
 umask o-w
 
