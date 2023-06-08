@@ -34,6 +34,8 @@ zstyle ':z4h:autosuggestions' end-of-line  'accept'
 # Additional Git repositories
 z4h install marlonrichert/zsh-autocomplete || return
 z4h install MichaelAquilina/zsh-you-should-use || return
+z4h install romkatv/windows-terminal-zsh-integration || return
+
 
 # Anything that requires user interaction should be done above this line.
 z4h init || return
@@ -41,6 +43,7 @@ z4h init || return
 # Additional sources (should be equivalent to additional repositories)
 # z4h source marlonrichert/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 z4h source MichaelAquilina/zsh-you-should-use/you-should-use.plugin.zsh
+z4h source romkatv/windows-terminal-zsh-integration/windows-terminal-zsh-integration.plugin.zsh
 z4h source $HOME/.zsh/aliases
 z4h source $HOME/.zsh/functions
 
