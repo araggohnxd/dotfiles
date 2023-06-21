@@ -23,6 +23,7 @@ function install_packages() {
 		gdb
 		gedit
 		git
+		git-delta
 		go
 		inetutils
 		lib32-glibc
