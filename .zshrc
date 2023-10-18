@@ -12,6 +12,7 @@ export GPG_TTY=$TTY
 export VISUAL="nano"
 export EDITOR="nano"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
+export MANROFFOPT="-c"
 export YSU_HARDCORE=1
 
 # if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then # Set XLaunch variables if running in WSL
@@ -65,3 +66,13 @@ z4h bindkey z4h-clear-screen-hard-top Ctrl+L   # clear terminal and scrollback h
 
 # Set history file path
 HISTFILE=$HOME/.zsh/.zsh_history
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export PATH=~/.npm-global/bin:$PATH
