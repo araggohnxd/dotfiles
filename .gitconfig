@@ -2,6 +2,9 @@
 	name = Matheus Oliveira
 	email = 31555284+araggohnxd@users.noreply.github.com
 
+[includeIf "gitdir:~/projects/guardian/"]
+	path = ~/projects/guardian/.gitconfig
+
 [core]
 	editor = nano
 
@@ -25,3 +28,10 @@
 
 [diff]
 	colorMoved = default
+
+[push]
+	autoSetupRemote = true
+
+[alias]
+	main-branch = !git symbolic-ref refs/remote/origin/HEAD | cut -d'/' -f4
+	fomo = !git fetch origin $(git main-branch) && git rebase origin/$(git main-branch) --autostash

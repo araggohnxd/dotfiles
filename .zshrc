@@ -20,10 +20,10 @@ export YSU_HARDCORE=1
 # 	export LIBGL_ALWAYS_INDIRECT=1
 # fi
 
-zstyle ':z4h:' start-tmux no
+# zstyle ':z4h:' start-tmux no
 # zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
-# zstyle ':z4h:' term-vresize top
-# zstyle ':z4h:' prompt-at-bottom yes
+zstyle ':z4h:' term-vresize top
+zstyle ':z4h:' prompt-at-bottom yes
 zstyle ':z4h:' term-shell-integration yes
 zstyle ':z4h:ssh-agent:' start yes
 zstyle ':z4h:ssh-agent:' extra-args -t 20h
@@ -58,8 +58,8 @@ z4h bindkey z4h-cd-forward Alt+Right              # cd into the next directory
 z4h bindkey z4h-cd-up Alt+Up                      # cd into the parent directory
 z4h bindkey z4h-cd-down Alt+Down                  # open fzf
 z4h bindkey z4h-eof Ctrl+D                        # EOF
-# z4h bindkey cls Ctrl+L                            # clear terminal and scrollback history
-z4h bindkey z4h-clear-screen-hard-top Ctrl+L   # clear terminal and scrollback history
+z4h bindkey z4h-clear-screen-soft-bottom Ctrl+L   # clear terminal and scrollback history
+# z4h bindkey z4h-clear-screen-hard-bottom Ctrl+L   # clear terminal and scrollback history
 
 # Define named directories
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home # ~w <=> Windows home directory on WSL
@@ -75,4 +75,5 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export PATH=~/.npm-global/bin:$PATH
+export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
