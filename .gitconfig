@@ -5,6 +5,9 @@
 [includeIf "gitdir:~/projects/guardian/"]
 	path = ~/projects/guardian/.gitconfig
 
+[url "git@gh-personal"]
+	insteadOf = git@github.com
+
 [core]
 	editor = nano
 

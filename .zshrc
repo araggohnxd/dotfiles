@@ -13,12 +13,11 @@ export VISUAL="nano"
 export EDITOR="nano"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
 export MANROFFOPT="-c"
-export YSU_HARDCORE=1
 
-# if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then # Set XLaunch variables if running in WSL
-# 	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
-# 	export LIBGL_ALWAYS_INDIRECT=1
-# fi
+if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then
+	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+	export LIBGL_ALWAYS_INDIRECT=1
+fi
 
 # zstyle ':z4h:' start-tmux no
 # zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
@@ -33,7 +32,7 @@ zstyle ':z4h:autosuggestions' forward-char 'partial-accept'
 zstyle ':z4h:autosuggestions' end-of-line  'accept'
 
 # Additional Git repositories
-z4h install marlonrichert/zsh-autocomplete || return
+# z4h install marlonrichert/zsh-autocomplete || return
 z4h install MichaelAquilina/zsh-you-should-use || return
 z4h install romkatv/windows-terminal-zsh-integration || return
 
@@ -59,7 +58,6 @@ z4h bindkey z4h-cd-up Alt+Up                      # cd into the parent directory
 z4h bindkey z4h-cd-down Alt+Down                  # open fzf
 z4h bindkey z4h-eof Ctrl+D                        # EOF
 z4h bindkey z4h-clear-screen-soft-bottom Ctrl+L   # clear terminal and scrollback history
-# z4h bindkey z4h-clear-screen-hard-bottom Ctrl+L   # clear terminal and scrollback history
 
 # Define named directories
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home # ~w <=> Windows home directory on WSL
@@ -77,3 +75,11 @@ esac
 
 export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/araggohnxd/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/araggohnxd/.local/share/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/araggohnxd/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/araggohnxd/.local/share/google-cloud-sdk/completion.zsh.inc'; fi

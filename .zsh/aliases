@@ -2,6 +2,7 @@
 # Common
 alias cd="z"
 alias wu="cd ~w/"
+alias exa="eza"
 alias ls="exa --icons --group-directories-first"
 alias bat="bat --style=auto"
 alias cat="bat"
@@ -19,6 +20,7 @@ alias vi="vim"
 #alias nvim="lvim"
 #alias top="btm"
 alias fzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias ex="explorer.exe"
 
 # Git
 alias gs="git status"
@@ -54,10 +56,18 @@ alias actions="git clone git@github.com:araggohnxd/vogsphere-github-actions.git 
 
 # Utilities
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias update="dotfiles pull && yay -Syu --noconfirm && z4h update"
+alias update="sudo -v && dotfiles pull && yay -Syu --noconfirm && z4h update"
 alias nrc="nano ~/.zshrc"
 alias nal="nano ~/.zsh/aliases"
 alias nfn="nano ~/.zsh/functions"
 alias gnbb="gnb | tr -d '\n' | cs"
 alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 alias workspace="ssh workspace -p"
+
+# Python
+alias uvr='uv run'
+
+# Docker
+alias dcu='docker compose up'
+alias dcud='dcu --detach'
+alias dcuw='dcu --watch'

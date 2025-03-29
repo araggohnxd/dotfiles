@@ -1,15 +1,29 @@
 ### Define functions
 # Create directory and change to it
-function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && builtin cd -- "$1" }
+function md() {
+	[[ $# == 1 ]] && mkdir -p -- "$1" && builtin cd -- "$1"
+}
 
 # Find all files containing '$1' in it's name
-function fn() { find -name "*$1*" | bat -p --style=numbers }
+function fn() {
+	find -name "*$1*" | bat -p --style=numbers
+}
 
 # Use bat as pager when browsing help pages
 function help() {
-	cmd=$@
-	[[ -n $aliases[$@] ]] && cmd=$(echo $aliases[$@] | awk '{print $1}')
-	$cmd --help 2>&1 | bat -plhelp
+	if [[ $# -eq 0 ]]; then
+		echo "Usage: help <command> [args]"
+		return
+	fi
+
+	local cmd=$1
+	shift
+
+	if [[ -n $aliases[$cmd] ]]; then
+		cmd=$(echo $aliases[$cmd])
+	fi
+
+	${=cmd} "$@" --help 2>&1 | bat -plhelp
 }
 
 # Clear terminal and scrollback history
@@ -18,3 +32,14 @@ function cls() {
 	zle && zle .reset-prompt && zle -R
 }
 zle -N cls
+
+# Looks for manage.py in the current directory and subdirectories, then runs with uv
+function uvm() {
+	manage=$(find . -maxdepth 2 -name manage.py | head -n 1)
+
+	if [[ -n $manage ]]; then
+		uv run $manage $@
+	else
+		echo "uvm: manage.py not found"
+	fi
+}
