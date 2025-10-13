@@ -1,12 +1,9 @@
 [user]
-	name = Matheus Oliveira
-	email = 31555284+araggohnxd@users.noreply.github.com
+	name = Matheus Oliveira Cruz
+	email = moc@guardian-asset.com
 
-[includeIf "gitdir:~/projects/guardian/"]
-	path = ~/projects/guardian/.gitconfig
-
-[url "git@gh-personal"]
-	insteadOf = git@github.com
+[includeIf "gitdir:~/personal/"]
+	path = ~/personal/.gitconfig
 
 [core]
 	editor = nano
@@ -32,9 +29,10 @@
 [diff]
 	colorMoved = default
 
+[alias]
+	main-branch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+	fomo = !git fetch origin $(git main-branch) && git rebase origin/$(git main-branch) --autostash
 [push]
 	autoSetupRemote = true
-
-[alias]
-	main-branch = !git symbolic-ref refs/remote/origin/HEAD | cut -d'/' -f4
-	fomo = !git fetch origin $(git main-branch) && git rebase origin/$(git main-branch) --autostash
+[branch]
+	autoSetupMerge = simple

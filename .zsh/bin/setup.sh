@@ -34,7 +34,7 @@ function install_packages() {
 		man-db
 		man-pages
 		nano
-		neofetch
+		fastfetch
 		neovim
 		npm
 		openssh
@@ -64,10 +64,10 @@ function install_packages() {
 	if (( WSL )); then
 		# uninstall fakeroot-tcp and delete fakeroot from ignored packages
 		# to avoid conflicts with base-devel installation
-		sudo sed -i '/fakeroot/d' /etc/pacman.conf
-		sudo pacman -Rns --noconfirm fakeroot-tcp
+		sudo sed -i '/fakeroot/d' /etc/pacman.conf || true
+		sudo pacman -Rns --noconfirm fakeroot-tcp || true
 	fi
-	sudo pacman -S --noconfirm "${packages[@]}"
+	sudo pacman -S --noconfirm "${packages[@]}" || true
 	[[ -n $(pacman -Qtdq) ]] && pacman -Qtdq | sudo pacman -Rns --noconfirm -
 	paccache -r
 }
@@ -124,8 +124,8 @@ add_to_sudoers
 
 install_packages
 install_yay
-install_norminette
+# install_norminette
 install_vscode
-install_wslu
+# install_wslu
 
 echo setup done

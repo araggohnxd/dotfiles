@@ -14,10 +14,10 @@ export EDITOR="nano"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
 export MANROFFOPT="-c"
 
-if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then
-	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
-	export LIBGL_ALWAYS_INDIRECT=1
-fi
+# if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then # Set XLaunch variables if running in WSL
+# 	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+# 	export LIBGL_ALWAYS_INDIRECT=1
+# fi
 
 # zstyle ':z4h:' start-tmux no
 # zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
@@ -32,7 +32,7 @@ zstyle ':z4h:autosuggestions' forward-char 'partial-accept'
 zstyle ':z4h:autosuggestions' end-of-line  'accept'
 
 # Additional Git repositories
-# z4h install marlonrichert/zsh-autocomplete || return
+z4h install marlonrichert/zsh-autocomplete || return
 z4h install MichaelAquilina/zsh-you-should-use || return
 z4h install romkatv/windows-terminal-zsh-integration || return
 
@@ -49,6 +49,7 @@ z4h source $HOME/.zsh/functions
 
 eval "$(zoxide init zsh)" # init z
 autoload -Uz zmv
+export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
 
 # Key bindings
 z4h bindkey z4h-backward-kill-word Ctrl+Backspace # delete whole word in command line
@@ -57,6 +58,8 @@ z4h bindkey z4h-cd-forward Alt+Right              # cd into the next directory
 z4h bindkey z4h-cd-up Alt+Up                      # cd into the parent directory
 z4h bindkey z4h-cd-down Alt+Down                  # open fzf
 z4h bindkey z4h-eof Ctrl+D                        # EOF
+# z4h bindkey cls Ctrl+L                          # clear terminal and scrollback history
+# z4h bindkey z4h-clear-screen-hard-top Ctrl+L    # clear terminal and scrollback history
 z4h bindkey z4h-clear-screen-soft-bottom Ctrl+L   # clear terminal and scrollback history
 
 # Define named directories
@@ -73,13 +76,10 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export PATH="$HOME/.npm-global/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 
-export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/araggohnxd/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/araggohnxd/.local/share/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/araggohnxd/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/araggohnxd/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+# . "$HOME/.asdf/asdf.sh"
