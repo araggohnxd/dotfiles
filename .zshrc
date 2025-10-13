@@ -14,10 +14,10 @@ export EDITOR="nano"
 export MANPAGER="sh -c 'col -bx | bat -plman'"
 export MANROFFOPT="-c"
 
-# if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then # Set XLaunch variables if running in WSL
-# 	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
-# 	export LIBGL_ALWAYS_INDIRECT=1
-# fi
+if [[ "$(</proc/version)" == *[Mm]icrosoft* ]] 2>/dev/null; then
+	export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+	export LIBGL_ALWAYS_INDIRECT=1
+fi
 
 # zstyle ':z4h:' start-tmux no
 # zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
@@ -49,7 +49,6 @@ z4h source $HOME/.zsh/functions
 
 eval "$(zoxide init zsh)" # init z
 autoload -Uz zmv
-export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
 
 # Key bindings
 z4h bindkey z4h-backward-kill-word Ctrl+Backspace # delete whole word in command line
@@ -76,10 +75,5 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
 export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# . "$HOME/.asdf/asdf.sh"

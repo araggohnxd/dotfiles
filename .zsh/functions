@@ -31,7 +31,6 @@ uvm() {
     if [[ -n "$manage_file" ]]; then
         uv run "$manage_file" "$@"
     else
-        echo "manage.py not found in the current directory or its subdirectories."
+        echo "uvm: manage.py not found"
     fi
 }
-

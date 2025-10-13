@@ -12,8 +12,8 @@ alias mv="mv -iv"
 alias rm="rm -vI"
 alias mkdir="mkdir -pv"
 alias yt-dlp="yt-dlp --embed-thumbnail"
-# alias ytdl="yt-dlp --config-locations ~/.config/yt-dlp/config -o '$(wslpath $(wslvar USERPROFILE))/Videos/%(title)s.%(ext)s'"
-# alias ytdla="yt-dlp -o '$(wslpath $(wslvar USERPROFILE))/Music/%(title)s.%(ext)s' --ignore-config -x --audio-format mp3"
+alias ytdl='yt-dlp --config-locations ~/.config/yt-dlp/config -o "$z4h_win_home/Videos/%(title)s.%(ext)s"'
+alias ytdla='yt-dlp -o "$z4h_win_home/Music/%(title)s.%(ext)s" --ignore-config -x --audio-format mp3'
 alias cs="utf8clip.exe"
 alias vi="vim"
 #alias vim="nvim"
@@ -33,6 +33,7 @@ alias ga="git add"
 alias gt="git tag"
 alias gps="git push"
 alias gpst="git push --tags"
+alias gfpt="git fetch --prune --tags"
 alias gpl="git pull"
 alias gplom="git pull origin master"
 alias gpuom="git push origin master"
@@ -63,7 +64,7 @@ alias actions="git clone git@github.com:araggohnxd/vogsphere-github-actions.git 
 
 # Utilities
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias update="dotfiles pull && yay -Syu --noconfirm && z4h update"
+alias update="sudo -v && dotfiles pull && yay -Syu --noconfirm && z4h update"
 alias nrc="nano ~/.zshrc"
 alias nal="nano ~/.zsh/aliases"
 alias nfn="nano ~/.zsh/functions"
@@ -71,10 +72,10 @@ alias gnbb="gnb | tr -d '\n' | cs"
 alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 alias workspace="ssh workspace -p"
 
+# Python
+alias uvr='uv run'
+
 # Docker
 alias dcu='docker compose up'
 alias dcud='dcu --detach'
 alias dcuw='dcu --watch'
-
-# Python
-alias uvr='uv run'
