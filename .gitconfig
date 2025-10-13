@@ -5,6 +5,9 @@
 [includeIf "gitdir:~/personal/"]
 	path = ~/personal/.gitconfig
 
+[includeIf "gitdir:~/.dotfiles/"]
+	path = ~/.dotfiles/.gitconfig
+
 [core]
 	editor = nano
 
