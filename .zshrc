@@ -32,7 +32,7 @@ zstyle ':z4h:autosuggestions' forward-char 'partial-accept'
 zstyle ':z4h:autosuggestions' end-of-line  'accept'
 
 # Additional Git repositories
-# z4h install marlonrichert/zsh-autocomplete || return
+z4h install marlonrichert/zsh-autocomplete || return
 z4h install MichaelAquilina/zsh-you-should-use || return
 z4h install romkatv/windows-terminal-zsh-integration || return
 
@@ -45,6 +45,7 @@ z4h init || return
 z4h source MichaelAquilina/zsh-you-should-use/you-should-use.plugin.zsh
 z4h source romkatv/windows-terminal-zsh-integration/windows-terminal-zsh-integration.plugin.zsh
 z4h source $HOME/.zsh/aliases
+z4h source $HOME/.zsh/kubectl_aliases
 z4h source $HOME/.zsh/functions
 
 eval "$(zoxide init zsh)" # init z
@@ -57,6 +58,8 @@ z4h bindkey z4h-cd-forward Alt+Right              # cd into the next directory
 z4h bindkey z4h-cd-up Alt+Up                      # cd into the parent directory
 z4h bindkey z4h-cd-down Alt+Down                  # open fzf
 z4h bindkey z4h-eof Ctrl+D                        # EOF
+# z4h bindkey cls Ctrl+L                          # clear terminal and scrollback history
+# z4h bindkey z4h-clear-screen-hard-top Ctrl+L    # clear terminal and scrollback history
 z4h bindkey z4h-clear-screen-soft-bottom Ctrl+L   # clear terminal and scrollback history
 
 # Define named directories
@@ -73,13 +76,5 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export PATH="$HOME/.npm-global/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
 export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/araggohnxd/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/araggohnxd/.local/share/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/araggohnxd/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/araggohnxd/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
