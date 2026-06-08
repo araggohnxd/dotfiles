@@ -39,3 +39,5 @@
 	autoSetupRemote = true
 [branch]
 	autoSetupMerge = simple
+[tag]
+	sort = version:refname
